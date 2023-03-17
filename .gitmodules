@@ -1,0 +1,9 @@
+[submodule "dashboard"]
+	path = dashboard
+	url = https://github.com/raphaelricardo10/n-queens-dashboard
+[submodule "solver"]
+	path = solver
+	url = https://github.com/raphaelricardo10/n-queens-solver
+[submodule "solver-api"]
+	path = solver-api
+	url = https://github.com/raphaelricardo10/n-queens-solver-api
