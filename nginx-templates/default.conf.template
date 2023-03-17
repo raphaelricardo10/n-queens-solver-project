@@ -1,0 +1,11 @@
+server {
+  listen 80;
+
+  location / {
+    proxy_pass ${DASHBOARD_URL};
+  }
+
+  location /solver-api/ {
+    proxy_pass ${SOLVER_API_URL};
+  }
+}

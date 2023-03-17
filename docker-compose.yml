@@ -1,18 +1,30 @@
 version: '3.8'
 
 services:
+  nginx:
+    image: nginx
+    container_name: nginx-container
+    ports:
+      - 9000:80
+    volumes:
+      - ./nginx-templates:/etc/nginx/templates:ro
+    environment:
+      - DASHBOARD_URL=http://dashboard:80
+      - SOLVER_API_URL=http://solverApi:3000/
+    depends_on:
+      - dashboard
+      - solverApi
+
   dashboard:
     container_name: dashboard-container
     image: dashboard-image
     build:
       context: ./dashboard
       dockerfile: Dockerfile
-    ports:
-      - 9000:80
     environment:
       - REACT_APP_API_TIMEOUT=10000
-      - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9002
-      - REACT_APP_SOLVER_API_URL=http://localhost:9001
+      - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9001
+      - REACT_APP_SOLVER_API_URL=http://localhost:9000/solver-api/
 
   solverApi:
     container_name: solver-api-container
@@ -21,5 +33,6 @@ services:
       context: ./solver-api
       dockerfile: Dockerfile
     ports:
-      - 9001:3001
-      - 9002:3002
+      - 9001:3002
+    environment:
+      - PORT=3000
