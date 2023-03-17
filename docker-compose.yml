@@ -5,10 +5,21 @@ services:
     container_name: dashboard-container
     image: dashboard-image
     build:
-      context: ./dashboard/
+      context: ./dashboard
       dockerfile: Dockerfile
     ports:
       - 9000:80
     environment:
-      - REACT_APP_NOTIFICATIONS_URI=ws://solver:3002
-      - REACT_APP_SOLVER_API_URL=http://solver:3001
+      - REACT_APP_API_TIMEOUT=10000
+      - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9002
+      - REACT_APP_SOLVER_API_URL=http://localhost:9001
+
+  solverApi:
+    container_name: solver-api-container
+    image: solver-api-image
+    build:
+      context: ./solver-api
+      dockerfile: Dockerfile
+    ports:
+      - 9001:3001
+      - 9002:3002
