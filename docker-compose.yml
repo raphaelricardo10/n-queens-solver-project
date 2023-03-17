@@ -21,10 +21,10 @@ services:
     build:
       context: ./dashboard
       dockerfile: Dockerfile
-    environment:
-      - REACT_APP_API_TIMEOUT=10000
-      - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9001
-      - REACT_APP_SOLVER_API_URL=http://localhost:9000/solver-api/
+      args:
+        - REACT_APP_API_TIMEOUT=10000
+        - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9001
+        - REACT_APP_SOLVER_API_URL=http://localhost:9000/solver-api/
 
   solverApi:
     container_name: solver-api-container
