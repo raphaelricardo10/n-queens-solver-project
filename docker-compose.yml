@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
       args:
         - REACT_APP_SOLVER_API_URL=http://localhost:9000/solver-api/
-        - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9000
+        - REACT_APP_WS_URI=ws://localhost:9000
 
   solverApi:
     container_name: solver-api-container
