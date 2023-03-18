@@ -11,6 +11,7 @@ services:
     environment:
       - DASHBOARD_URL=http://dashboard:80
       - SOLVER_API_URL=http://solverApi:3000/
+      - SOLVER_API_WS_URI=http://solverApi:3002
     depends_on:
       - dashboard
       - solverApi
@@ -22,9 +23,8 @@ services:
       context: ./dashboard
       dockerfile: Dockerfile
       args:
-        - REACT_APP_API_TIMEOUT=10000
-        - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9001
         - REACT_APP_SOLVER_API_URL=http://localhost:9000/solver-api/
+        - REACT_APP_NOTIFICATIONS_URI=ws://localhost:9000
 
   solverApi:
     container_name: solver-api-container
@@ -32,7 +32,5 @@ services:
     build:
       context: ./solver-api
       dockerfile: Dockerfile
-    ports:
-      - 9001:3002
     environment:
       - PORT=3000
